@@ -13,5 +13,5 @@ VALUES (1, "CS Lead", 35000, 1),
 -- Insert data into the employee table
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES   (1, "Jessica", "Moore", 3, NULL),
-         (2, "Mark", "Smith", 1, 2);
+         (2, "Mark", "Smith", 1, 4);
      

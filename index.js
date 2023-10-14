@@ -1,4 +1,3 @@
-const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 
@@ -82,6 +81,7 @@ const viewDepartments = () => {
             return;
         }
         console.table(result);
+        mainMenu();
     });
 };
 
@@ -94,11 +94,24 @@ const viewRoles = () => {
             return;
         }
         console.table(result);
+        mainMenu();
     });
 };
 
 const viewEmployees = () => {
-    const sql = 'SELECT * FROM employee';
+    const sql = `
+    SELECT e.id AS Employee_ID, 
+           e.first_name AS First_Name, 
+           e.last_name AS Last_Name, 
+           r.title AS Job_Title, 
+           d.name AS Department, 
+           r.salary AS Salary, 
+           CONCAT(m.first_name, ' ', m.last_name) AS Manager
+    FROM employee e
+    LEFT JOIN role r ON e.role_id = r.id
+    LEFT JOIN department d ON r.department_id = d.id
+    LEFT JOIN employee m ON e.manager_id = m.id
+    `;
 
     db.query(sql, (err, result) => {
         if (err) {
@@ -106,11 +119,9 @@ const viewEmployees = () => {
             return;
         }
         console.table(result);
+        mainMenu();
     });
 };
-
-
-
 
 const addDepartment = () => {
 
@@ -129,6 +140,7 @@ const addDepartment = () => {
                     console.error(err);
                 } else {
                     console.log('Department added successfully!');
+                    mainMenu();
                 }
             });
         });
@@ -160,6 +172,7 @@ const addRole = () => {
                     console.error(err);
                 } else {
                     console.log('Role added successfully!');
+                    mainMenu();
                 }
             });
         });
@@ -197,6 +210,7 @@ const addEmployee = () => {
                     console.error(err);
                 } else {
                     console.log('Employee added successfully!');
+                    mainMenu();
                 }
             });
         });
@@ -224,6 +238,7 @@ const updateDepartment = () => {
                     console.error(err);
                 } else {
                     console.log('Department updated successfully!');
+                    mainMenu();
                 }
             });
         });
@@ -260,6 +275,7 @@ const updateRole = () => {
                     console.error(err);
                 } else {
                     console.log('Role updated successfully!');
+                    mainMenu();
                 }
             });
         });
@@ -301,6 +317,7 @@ const updateEmployee = () => {
                     console.error(err);
                 } else {
                     console.log('Employee updated successfully!');
+                    mainMenu();
                 }
             });
         });
