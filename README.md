@@ -26,7 +26,7 @@
 ## Installation
 To install this project you will need SQL and Node.js.
 ## Usage
-
+![Alt text](assets/employee.png)
 ## Credits
 My class instructors, TA's a Tutor.
 
